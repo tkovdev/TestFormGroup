@@ -4,14 +4,14 @@ import {IBasicInfoFormGroup} from "../basic-info-form/basic-info-form.component"
 import {IDetailedInfoFormGroup} from "../detailed-info-form/detailed-info-form.component";
 
 @Component({
-  selector: 'app-main-form',
-  templateUrl: './main-form.component.html',
-  styleUrl: './main-form.component.css'
+  selector: 'app-secondary-form',
+  templateUrl: './secondary-form.component.html',
+  styleUrl: './secondary-form.component.css'
 })
-export class MainFormComponent implements OnInit{
-  form: FormGroup<IMainFormGroup>;
+export class SecondaryFormComponent implements OnInit{
+  form: FormGroup<ISecondaryFormGroup>;
   constructor() {
-    this.form = new FormGroup<IMainFormGroup>({
+    this.form = new FormGroup<ISecondaryFormGroup>({
       basicInfo: new FormGroup<IBasicInfoFormGroup>({
         name: new FormControl<string | null>({value: null, disabled: false})
       }),
@@ -22,10 +22,13 @@ export class MainFormComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    this.form.valueChanges.subscribe((c) => {
+      console.log(c)
+    })
   }
 }
 
-export interface IMainFormGroup {
+export interface ISecondaryFormGroup {
   basicInfo: FormGroup<IBasicInfoFormGroup>,
   detailedInfo: FormGroup<IDetailedInfoFormGroup>
 }
